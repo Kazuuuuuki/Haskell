@@ -31,3 +31,60 @@ head' :: [a] -> a
 head' [] = error "Can't call head on an empty list, dummy"
 head' (x:_) = x
 
+firstLetter :: String -> String
+firstLetter "" = "Empty string, whoops"
+firstLetter all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+
+bmiTell :: Double -> Double-> String 
+bmiTell weight height
+  | bmi <= skinny = "You are underweight" 
+  | bmi <= normal = "You're supposedly normal"
+  | bmi <= fat = "You're fat! Lose some"
+  | otherwise = "You're a whale, congrations!"
+  where bmi = weight / height ^ 2
+        skinny = 18.5
+        normal = 25.0
+        fat = 30.0
+
+
+
+
+max' :: (Ord a) => a -> a -> a 
+max' a b
+     | a <= b = b
+     | otherwise = a
+
+calcBmis :: [(Double, Double)] -> [Double]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where bmi weight height = weight / height ^ 2 
+
+initials :: String -> String
+initials firstname = [f] ++ ".  " ++ " ."
+    where (f:_) = firstname
+
+
+head2 :: [a] -> a
+head2 xs = case xs of [] -> error "No head for empty lists!"
+                      (x:_) -> x
+
+descriveList :: [a] -> String
+descriveList ls = "The list is "
+                  ++ case ls of [] -> "empty"
+                                [x] -> "a singleton list."
+                                xs -> "a longer list."
+
+  
+quicksort :: (Ord a) => [a] -> [a]
+quicksort [] = []
+quicksort (x:xs) = 
+  let smallerOrEqual = [a | a <- xs, a <= x]
+      larger = [a | a <- xs, a > x]
+  in quicksort smallerOrEqual ++ [x] ++ quicksort larger
+
+
+divideByTen :: (Floating a) => a -> a
+divideByTen = (/10)
+
+
+
+
